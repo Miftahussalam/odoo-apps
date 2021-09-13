@@ -1,0 +1,60 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="ms_timesheet_status.list">
+      <field name="name">ms_timesheet_status list</field>
+      <field name="model">ms_timesheet_status.ms_timesheet_status</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="ms_timesheet_status.action_window">
+      <field name="name">ms_timesheet_status window</field>
+      <field name="res_model">ms_timesheet_status.ms_timesheet_status</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="ms_timesheet_status.action_server">
+      <field name="name">ms_timesheet_status server</field>
+      <field name="model_id" ref="model_ms_timesheet_status_ms_timesheet_status"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="ms_timesheet_status" id="ms_timesheet_status.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="ms_timesheet_status.menu_1" parent="ms_timesheet_status.menu_root"/>
+    <menuitem name="Menu 2" id="ms_timesheet_status.menu_2" parent="ms_timesheet_status.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="ms_timesheet_status.menu_1_list" parent="ms_timesheet_status.menu_1"
+              action="ms_timesheet_status.action_window"/>
+    <menuitem name="Server to list" id="ms_timesheet_status" parent="ms_timesheet_status.menu_2"
+              action="ms_timesheet_status.action_server"/>
+    -->
+  </data>
+</odoo>
