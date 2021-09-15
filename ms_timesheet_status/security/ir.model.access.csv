@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ms_timesheet_status_ms_timesheet_status,ms_timesheet_status.ms_timesheet_status,model_ms_timesheet_status_ms_timesheet_status,,1,0,0,0
