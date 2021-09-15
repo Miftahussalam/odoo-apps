@@ -12,14 +12,11 @@ class AccountAnalyticLine(models.Model):
         ('cancel','Cancel'),
     ], string='State', default='open')
 
-    @api.multi
     def action_set_to_invoiced(self):
         self.write({'state':'invoiced'})
 
-    @api.multi
     def action_set_to_paid(self):
         self.write({'state':'paid'})
 
-    @api.multi
     def action_set_to_cancel(self):
         self.write({'state':'cancel'})

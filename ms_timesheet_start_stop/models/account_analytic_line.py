@@ -6,7 +6,6 @@ class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
     @api.depends('start_time', 'end_time', 'break_unit_amount')
-    @api.multi
     def _get_unit_amount(self):
         for rec in self :
             unit_amount = 0
