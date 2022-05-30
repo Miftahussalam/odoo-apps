@@ -33,7 +33,7 @@ class AccountAnalyticLine(models.Model):
         cell_format['header'] = workbook.add_format({
             'bold': True,
             'align': 'center',
-            'bg_color': '',
+            'bg_color': '#d9d9d9',
             'border': True,
             'font_name': 'Arial',
         })
@@ -50,7 +50,7 @@ class AccountAnalyticLine(models.Model):
         })
         cell_format['total'] = workbook.add_format({
             'bold': True,
-            'bg_color': '',
+            'bg_color': '#d9d9d9',
             'num_format': '#,##0.00',
             'border': True,
             'font_name': 'Arial',
