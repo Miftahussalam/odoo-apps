@@ -82,7 +82,7 @@ class AccountAnalyticLine(models.Model):
 
             worksheet.set_column('A:A', 5)
             worksheet.set_column('B:B', 10)
-            worksheet.set_column('C:C', 40)
+            worksheet.set_column('C:C', 60)
             worksheet.set_column('D:G', 20)
             worksheet.merge_range(0, 0, 1, column_length, report_name, cell_format['title'])
             worksheet.write('A4', 'No', cell_format['header'])
