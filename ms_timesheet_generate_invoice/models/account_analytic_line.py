@@ -22,7 +22,7 @@ class AccountAnalyticLine(models.Model):
             for project_id in partner_project_ids:
                 timesheet_ids = self.filtered(lambda t: t.project_id == project_id)
                 line_vals.append((0, 0, {
-                    'name': f'Custome module {project_id.display_name}',
+                    'name': f'Custom module {project_id.display_name}',
                     'quantity': round(sum(l.unit_amount for l in timesheet_ids), 2),
                     'price_unit': project_id.price_unit,
                     'tax_ids': [],
