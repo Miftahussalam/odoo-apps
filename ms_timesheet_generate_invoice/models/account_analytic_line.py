@@ -27,10 +27,18 @@ class AccountAnalyticLine(models.Model):
                     'price_unit': project_id.price_unit,
                     'tax_ids': [],
                 }))
+            narration = ''
+            if self.env.user.company_id.partner_id.bank_ids:
+                bank_list = [f'{bank_id.bank_id.name} {bank_id.acc_number}' for bank_id in self.env.user.company_id.partner_id.bank_ids]
+                bank_list = '\n'.join(bank_list)
+                narration = f"""{bank_list}
+
+a/n {self.env.user.company_id.name}"""
             invoice_id = self.env['account.move'].create({
                 'partner_id': partner_id.id,
                 'type': 'out_invoice',
-                'invoice_line_ids': line_vals
+                'invoice_line_ids': line_vals,
+                'narration': narration,
             })
             invoice_id.action_post()
             invoice_ids += invoice_id
