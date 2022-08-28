@@ -49,6 +49,14 @@
                             <field name="invitation_name"/>
                             <field name="invitation_description"/>
                         </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group col="4">
+                                    <field name="create_uid"/>
+                                    <field name="create_date"/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>
