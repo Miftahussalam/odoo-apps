@@ -2,9 +2,9 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
-class WeddingWishlist(models.Model):
-    _name = "wedding.wishlist"
-    _description = "Wedding Wishlist"
+class WeddingWishes(models.Model):
+    _name = "wedding.wishes"
+    _description = "Wedding Wishes"
     _order = "id desc"
 
     name = fields.Char(string='Name')

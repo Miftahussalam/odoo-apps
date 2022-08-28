@@ -27,7 +27,7 @@
     # always loaded
     'data': [
         'views/sync_data_views.xml',
-        'views/wedding_wishlist_views.xml',
+        'views/wedding_wishes_views.xml',
         'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode

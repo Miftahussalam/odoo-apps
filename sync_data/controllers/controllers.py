@@ -1,21 +1,12 @@
 # -*- coding: utf-8 -*-
-# from odoo import http
+from odoo import http
+from odoo.http import request
 
 
-# class SyncData(http.Controller):
-#     @http.route('/sync_data/sync_data/', auth='public')
-#     def index(self, **kw):
-#         return "Hello, world"
+class WeddingWishes(http.Controller):
 
-#     @http.route('/sync_data/sync_data/objects/', auth='public')
-#     def list(self, **kw):
-#         return http.request.render('sync_data.listing', {
-#             'root': '/sync_data/sync_data',
-#             'objects': http.request.env['sync_data.sync_data'].search([]),
-#         })
-
-#     @http.route('/sync_data/sync_data/objects/<model("sync_data.sync_data"):obj>/', auth='public')
-#     def object(self, obj, **kw):
-#         return http.request.render('sync_data.object', {
-#             'object': obj
-#         })
+    @http.route('/wishes', type='json', auth="none", methods=['POST'], csrf=False)
+    def create(self, **post):
+        wedding_wishlist_obj = request.env['wedding.wishes'].sudo()
+        print('\n post', post)
+        return post
