@@ -1,0 +1,69 @@
+<odoo>
+    <data>
+
+        <record id="generate_guest_data_view_search" model="ir.ui.view">
+            <field name="name">generate.guest.data.search</field>
+            <field name="model">generate.guest.data</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="generate_guest_data_view_tree" model="ir.ui.view">
+            <field name="name">generate.guest.data.tree</field>
+            <field name="model">generate.guest.data</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="generate_guest_data_view_form" model="ir.ui.view">
+            <field name="name">generate.guest.data.form</field>
+            <field name="model">generate.guest.data</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_generate" string="Generate" class="oe_highlight" type="object"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name" placeholder="Excel File" readonly="1" force_save="1"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="file" filename="name"/>
+                            </group>
+                        </group>
+                        <group string="Result">
+                            <field name="result" nolabel="1"/>
+                        </group>
+                        <notebook>
+                            <page string="Audit Trail">
+                                <group col="4">
+                                    <field name="create_uid"/>
+                                    <field name="create_date"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="generate_guest_data_action" model="ir.actions.act_window">
+            <field name="name">Generate Guest Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">generate.guest.data</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="generate_guest_data_menu" name="Generate Guest Data" parent="sync_data_sub" action="generate_guest_data_action" sequence="20"/>
+
+    </data>
+</odoo>

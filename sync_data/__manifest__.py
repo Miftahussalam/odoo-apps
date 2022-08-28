@@ -28,6 +28,7 @@
     'data': [
         'views/sync_data_views.xml',
         'views/wedding_wishes_views.xml',
+        'views/generate_guest_data_views.xml',
         'security/ir.model.access.csv',
     ],
     # only loaded in demonstration mode
