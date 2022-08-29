@@ -10,7 +10,7 @@ class WeddingWishes(http.Controller):
         wedding_wishlist_obj = request.env['wedding.wishes'].sudo()
         vals = {
             'name': data.get('name', False),
-            'image_filename': data.get('image_filename', '').split('\\')[-1],
+            'image_filename': data.get('image_filename', '').replace('undefined', '').split('\\')[-1],
             'description': data.get('description', False),
             'wishes': data.get('wishes', False),
             'invitation_code': data.get('invitation_code', False),
