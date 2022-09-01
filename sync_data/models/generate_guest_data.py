@@ -28,7 +28,7 @@ class GenerateGuestData(models.Model):
             values = []
             for sheet in sheets:
                 for i in range(sheet.nrows):
-                    if sheet.cell(i, 0).value == 'Kode':
+                    if sheet.cell(i, 0).value == 'Kode' or not sheet.cell(i, 1).value:
                         continue
                     values.append({
                         "code": sheet.cell(i, 0).value,
