@@ -91,7 +91,7 @@ class AccountAnalyticLine(models.Model):
                 worksheet.write(3, column, col, cell_format['header'])
                 column += 1
             data_list = []
-            for rec in self.filtered(lambda t: t.project_id == project_id).sort(key=lambda t: t.date):
+            for rec in self.filtered(lambda t: t.project_id == project_id).sorted(key=lambda t: t.date):
                 data_list.append([
                     rec.date or '',
                     rec.name or '',
