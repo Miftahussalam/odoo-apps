@@ -3,8 +3,19 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
+
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
+
+    @api.depends('project_id.price_unit', 'unit_amount')
+    def _get_amount(self):
+        for rec in self:
+            rec.amount = round(rec.project_id.price_unit * rec.unit_amount, -3)
+
+    amount = fields.Float(
+        string='Amount',
+        store=False,
+        compute='_get_amount')
 
     def action_generate_invoice(self):
         project_ids = self.mapped('project_id')
