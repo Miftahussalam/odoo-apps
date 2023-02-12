@@ -23,6 +23,7 @@
     'depends': [
         'base',
         'account',
+        'analytic',
         'hr_timesheet',
     ],
 
