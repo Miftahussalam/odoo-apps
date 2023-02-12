@@ -63,6 +63,14 @@
                 <xpath expr="//field[@name='amount']" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="state"/>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="before">
+                    <field name="start_time"/>
+                    <field name="end_time"/>
+                    <field name="break_unit_amount"/>
+                </xpath>
 
             </field>
         </record>
