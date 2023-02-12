@@ -28,6 +28,9 @@
 
     # always loaded
     'data': [
+        'security/res_groups.xml',
+        'security/ir.model.access.csv',
+        'security/ir_rule.xml',
         'views/account_analytic_line_views.xml',
     ],
     # only loaded in demonstration mode
