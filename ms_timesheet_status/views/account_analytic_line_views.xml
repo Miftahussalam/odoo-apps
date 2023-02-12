@@ -39,6 +39,38 @@
             </field>
         </record>
 
+        <record id="timesheet_view_tree_user" model="ir.ui.view">
+            <field name="name">account.analytic.line.tree</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.timesheet_view_tree_user"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="timesheet_view_form" model="ir.ui.view">
+            <field name="name">account.analytic.line.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group col="4">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="project_id"/>
+                            <field name="start_time"/>
+                            <field name="end_time"/>
+                            <field name="break_unit_amount"/>
+                            <field name="unit_amount"/>
+                            <field name="state"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
         <record id="model_account_analytic_line_invoiced" model="ir.actions.server">
             <field name="name">Set to Invoiced</field>
             <field name="model_id" ref="analytic.model_account_analytic_line"/>
