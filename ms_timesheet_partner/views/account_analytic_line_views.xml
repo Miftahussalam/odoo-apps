@@ -18,5 +18,9 @@
             </field>
         </record>
 
+        <record id="hr_timesheet.timesheet_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('ms_timesheet_partner.group_hr_timesheet_partner'))]"/>
+        </record>
+
     </data>
 </odoo>
