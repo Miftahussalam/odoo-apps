@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_account_analytic_line_partner,analytic.account.analytic.line.timesheet.partner,analytic.model_account_analytic_line,ms_timesheet_partner.group_hr_timesheet_partner,1,1,1,1
+access_account_analytic_line_partner,analytic.account.analytic.line.timesheet.partner,analytic.model_account_analytic_line,ms_timesheet_partner.group_hr_timesheet_partner,1,0,0,0
 access_account_analytic_partner,analytic.account.analytic.timesheet.partner,analytic.model_account_analytic_account,ms_timesheet_partner.group_hr_timesheet_partner,1,1,0,0
 access_uom_uom_hr_timesheet_partner,uom.uom.timesheet.partner,uom.model_uom_uom,ms_timesheet_partner.group_hr_timesheet_partner,1,0,0,0
 access_project_project_partner,project.project.timesheet.partner,project.model_project_project,ms_timesheet_partner.group_hr_timesheet_partner,1,0,0,0
