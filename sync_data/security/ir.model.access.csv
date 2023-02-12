@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_wedding_wishes_all,wedding_wishes_all,model_wedding_wishes,base.group_user,1,1,1,1
-access_generate_guest_data_all,generate_guest_data_all,model_generate_guest_data,base.group_user,1,1,1,1
