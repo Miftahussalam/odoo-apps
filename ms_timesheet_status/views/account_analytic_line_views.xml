@@ -50,24 +50,34 @@
             </field>
         </record>
 
-        <record id="timesheet_view_form" model="ir.ui.view">
+        <!-- Inherit Form View to Modify it -->
+        <record id="hr_timesheet_line_form" model="ir.ui.view">
             <field name="name">account.analytic.line.form</field>
             <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form"/>
             <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group col="4">
-                            <field name="date"/>
-                            <field name="name"/>
-                            <field name="project_id"/>
-                            <field name="start_time"/>
-                            <field name="end_time"/>
-                            <field name="break_unit_amount"/>
-                            <field name="unit_amount"/>
-                            <field name="state"/>
-                        </group>
-                    </sheet>
-                </form>
+
+                <xpath expr="//field[@name='task_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="timesheet_view_form_user" model="ir.ui.view">
+            <field name="name">account.analytic.line.form</field>
+            <field name="model">account.analytic.line</field>
+            <field name="inherit_id" ref="hr_timesheet.timesheet_view_form_user"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
             </field>
         </record>
 
