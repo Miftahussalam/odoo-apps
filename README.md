@@ -1,2 +1,2 @@
 # odoo-apps
-Odoo Apps All Version
+Odoo apps all version
