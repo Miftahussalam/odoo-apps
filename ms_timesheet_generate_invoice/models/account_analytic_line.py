@@ -67,3 +67,10 @@ a/n {self.env.user.company_id.name}"""
                 'domain': [('id', 'in', invoice_ids.ids)],
             })
         return action
+
+    def recalculate_amount(self):
+        rec_ids = self.search([
+            ('amount', '=', 0),
+            ('project_id.price_unit', '!=', 0),
+        ])
+        rec_ids._get_amount()
