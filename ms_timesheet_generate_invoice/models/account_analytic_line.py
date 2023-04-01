@@ -70,7 +70,7 @@ a/n {self.env.user.company_id.name}"""
 
     def recalculate_amount(self):
         rec_ids = self.search([
-            ('amount', '=', 0),
+            ('amount', 'in', [0, False]),
             ('project_id.price_unit', '!=', 0),
         ])
         rec_ids._get_amount()
