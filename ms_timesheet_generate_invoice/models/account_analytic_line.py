@@ -14,7 +14,7 @@ class AccountAnalyticLine(models.Model):
 
     amount = fields.Float(
         string='Amount',
-        store=False,
+        store=True,
         compute='_get_amount')
 
     def action_generate_invoice(self):
