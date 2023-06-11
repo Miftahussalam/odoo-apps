@@ -36,7 +36,7 @@ class AccountAnalyticLine(models.Model):
     def button_resume(self):
         for rec in self.filtered(lambda t: t.break_time):
             additional_break = fields.Datetime.now() - rec.break_time
-            additional_break = additional_break.seconds / 3600.0
+            additional_break = additional_break.total_seconds() / 3600.0
             rec.write({
                 'break_time': False,
                 'break_unit_amount': rec.break_unit_amount + additional_break
