@@ -24,6 +24,7 @@
         'base',
         'account',
         'hr_timesheet',
+        'ms_timesheet_partner',
     ],
 
     # always loaded

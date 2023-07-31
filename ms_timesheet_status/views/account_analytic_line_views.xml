@@ -95,6 +95,7 @@
             <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
             <field name="state">code</field>
             <field name="code">action = records.action_set_to_invoiced()</field>
+            <field name="groups_id" eval="[(4, ref('hr_timesheet.group_timesheet_manager'))]"/>
         </record>
 
         <record id="model_account_analytic_line_paid" model="ir.actions.server">
@@ -103,6 +104,7 @@
             <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
             <field name="state">code</field>
             <field name="code">action = records.action_set_to_paid()</field>
+            <field name="groups_id" eval="[(4, ref('hr_timesheet.group_timesheet_manager'))]"/>
         </record>
 
         <record id="model_account_analytic_line_cancel" model="ir.actions.server">
@@ -111,6 +113,7 @@
             <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
             <field name="state">code</field>
             <field name="code">action = records.action_set_to_cancel()</field>
+            <field name="groups_id" eval="[(4, ref('hr_timesheet.group_timesheet_manager'))]"/>
         </record>
 
     </data>
