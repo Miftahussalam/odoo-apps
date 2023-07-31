@@ -25,6 +25,8 @@
         'account',
         'analytic',
         'hr_timesheet',
+        'ms_timesheet_partner',
+        'ms_timesheet_start_stop',
     ],
 
     # always loaded

@@ -9,6 +9,8 @@
 
                 <xpath expr="//field[@name='unit_amount']" position="after">
                     <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
+                    <field name="developer_amount" sum="Total Amount" groups="ms_timesheet_partner.group_hr_timesheet_developer"/>
+                    <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
                 </xpath>
 
             </field>

@@ -7,15 +7,21 @@ from odoo.exceptions import ValidationError
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    @api.depends('project_id.price_unit', 'unit_amount')
+    @api.depends('project_id.price_unit', 'employee_id.timesheet_cost', 'unit_amount')
     def _get_amount(self):
         for rec in self:
-            rec.amount = round(rec.project_id.price_unit * rec.unit_amount, -3)
+            amount = round(rec.project_id.price_unit * rec.unit_amount, -3)
+            developer_amount = round(rec.employee_id.timesheet_cost * rec.unit_amount, -3)
+            rec.amount = amount
+            rec.developer_amount = developer_amount
+            rec.real_amount = amount - developer_amount
 
     amount = fields.Float(
         string='Amount',
         store=True,
         compute='_get_amount')
+    developer_amount = fields.Float(compute='_get_amount', string='Developer Amount', store=True)
+    real_amount = fields.Float(compute='_get_amount', string='Real Amount', store=True)
 
     def action_generate_invoice(self):
         project_ids = self.mapped('project_id')
