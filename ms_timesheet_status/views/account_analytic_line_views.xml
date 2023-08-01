@@ -28,7 +28,8 @@
             <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
             <field name="arch" type="xml">
                 <field name="unit_amount" position="after">
-                    <field name="state"/>
+                    <field name="is_state_readonly" invisible="1"/>
+                    <field name="state" attrs="{'readonly': [('is_state_readonly', '=', True)]}" force_save="1"/>
                 </field>
                 <xpath expr="//field[@name='employee_id']" position="attributes">
                     <attribute name="invisible">1</attribute>
