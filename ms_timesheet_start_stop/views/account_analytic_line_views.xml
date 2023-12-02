@@ -10,8 +10,8 @@
                     <field name="start_time"/>
                     <field name="break_time"/>
                     <field name="end_time"/>
-                    <button name="button_break" type="object" string=" Break" class="fa fa-pause"/>
-                    <button name="button_resume" type="object" string=" Resume" class="fa fa-play"/>
+                    <button name="button_break" type="object" string=" Break" class="fa fa-pause btn-danger"/>
+                    <button name="button_resume" type="object" string=" Resume" class="fa fa-play btn-success"/>
                     <field name="break_unit_amount" widget="timesheet_uom" sum="Total"/>
                 </field>
             </field>
