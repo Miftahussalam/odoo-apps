@@ -4,16 +4,18 @@ from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 
 
-
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    @api.depends('start_time', 'end_time', 'break_unit_amount')
+    @api.depends('start_time', 'end_time', 'break_time', 'break_unit_amount')
     def _get_unit_amount(self):
         for rec in self:
             unit_amount = 0
-            if rec.start_time and rec.end_time:
-                unit_amount = rec.end_time - rec.start_time
+            if rec.start_time and (rec.break_time or rec.end_time):
+                if rec.end_time:
+                    unit_amount = rec.end_time - rec.start_time
+                else:
+                    unit_amount = rec.break_time - rec.start_time
                 unit_amount = unit_amount.total_seconds() / 60 / 60
                 if rec.break_unit_amount:
                     unit_amount -= rec.break_unit_amount
@@ -23,6 +25,7 @@ class AccountAnalyticLine(models.Model):
     end_time = fields.Datetime(string='End Time')
     break_time = fields.Datetime(
         string='Break Time',
+        readonly=True,
         copy=False)
     break_unit_amount = fields.Float(string='Break Time (Hour(s))')
     unit_amount = fields.Float(compute='_get_unit_amount', store=True)
