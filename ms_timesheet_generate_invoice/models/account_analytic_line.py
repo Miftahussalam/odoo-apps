@@ -2,19 +2,31 @@
 
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
+from datetime import datetime, timedelta
 
 
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
-    @api.depends('project_id.price_unit', 'employee_id.timesheet_cost', 'unit_amount')
+    @api.depends('project_id.price_unit', 'employee_id.timesheet_cost', 'unit_amount', 'date')
     def _get_amount(self):
         for rec in self:
             amount = round(rec.project_id.price_unit * rec.unit_amount, -3)
             developer_amount = round(rec.employee_id.timesheet_cost * rec.unit_amount, -3)
+            target_amount = 0
+            if rec.date:
+                timesheet_target_amount = self.env['ir.config_parameter'].sudo().get_param('timesheet_target_amount', '0')
+                timesheet_target_amount = float(timesheet_target_amount)
+                current_date = rec.date
+                current_month = rec.date.month
+                while current_date.month == current_month:
+                    if current_date.weekday() <= 4:
+                        target_amount += timesheet_target_amount
+                    current_date = current_date - timedelta(days=1)
             rec.amount = amount
             rec.developer_amount = developer_amount
             rec.real_amount = amount - developer_amount
+            rec.target_amount = target_amount
 
     amount = fields.Float(
         string='Amount',
@@ -22,6 +34,7 @@ class AccountAnalyticLine(models.Model):
         compute='_get_amount')
     developer_amount = fields.Float(compute='_get_amount', string='Developer Amount', store=True)
     real_amount = fields.Float(compute='_get_amount', string='Real Amount', store=True)
+    target_amount = fields.Float(compute='_get_amount', string='Target Amount', store=True)
 
     def action_generate_invoice(self):
         project_ids = self.mapped('project_id')

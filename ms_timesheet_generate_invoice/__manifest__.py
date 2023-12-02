@@ -31,6 +31,7 @@
 
     # always loaded
     'data': [
+        'data/ir_config_parameter.xml',
         'views/account_analytic_line_views.xml',
         'views/project_project_views.xml',
     ],
