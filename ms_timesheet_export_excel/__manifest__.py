@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Timesheet Status",
+    'name': "Timesheet Export Excel",
 
     'summary': """
-        Tracking status of timesheet (open, invoiced, paid, cancel)
+        Export timesheet to excel and grouping by project
     """,
 
     'description': """

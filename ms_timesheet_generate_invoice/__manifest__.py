@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Timesheet Status",
+    'name': "Timesheet Generate Invoice",
 
     'summary': """
-        Tracking status of timesheet (open, invoiced, paid, cancel)
+        Generate customer invoice based on timesheet
     """,
 
     'description': """
@@ -23,12 +23,14 @@
     'depends': [
         'base',
         'account',
+        'analytic',
         'hr_timesheet',
     ],
 
     # always loaded
     'data': [
         # 'views/account_analytic_line_views.xml',
+        # 'views/project_project_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

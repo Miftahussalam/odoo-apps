@@ -22,12 +22,13 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'analytic',
         'hr_timesheet',
     ],
 
     # always loaded
     'data': [
-        'views/account_analytic_line_views.xml',
+        # 'views/account_analytic_line_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

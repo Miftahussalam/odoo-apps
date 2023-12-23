@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Timesheet Status",
+    'name': "Timesheet Customer",
 
     'summary': """
-        Tracking status of timesheet (open, invoiced, paid, cancel)
+        Customer can login to system and check timesheet for them
     """,
 
     'description': """
@@ -23,12 +23,16 @@
     'depends': [
         'base',
         'account',
+        'product',
         'hr_timesheet',
     ],
 
     # always loaded
     'data': [
-        # 'views/account_analytic_line_views.xml',
+        'security/res_groups.xml',
+        'security/ir.model.access.csv',
+        'security/ir_rule.xml',
+        'views/account_analytic_line_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
