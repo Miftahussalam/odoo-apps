@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Start Stop Timesheet",
+    'name': "Timesheet Export Excel",
 
     'summary': """
-        Add start, stop and break time to track duration on timesheet 
+        Export timesheet to excel and grouping by project
     """,
 
     'description': """
-        
+
     """,
 
     'author': "Miftahussalam",
@@ -22,7 +22,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
-        'analytic',
+        'account',
         'hr_timesheet',
     ],
 

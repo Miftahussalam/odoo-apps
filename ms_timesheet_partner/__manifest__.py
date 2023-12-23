@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Start Stop Timesheet",
+    'name': "Timesheet Customer",
 
     'summary': """
-        Add start, stop and break time to track duration on timesheet 
+        Customer can login to system and check timesheet for them
     """,
 
     'description': """
-        
+
     """,
 
     'author': "Miftahussalam",
@@ -22,13 +22,17 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
-        'analytic',
+        'account',
+        'product',
         'hr_timesheet',
     ],
 
     # always loaded
     'data': [
-        # 'views/account_analytic_line_views.xml',
+        'security/res_groups.xml',
+        'security/ir.model.access.csv',
+        'security/ir_rule.xml',
+        'views/account_analytic_line_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

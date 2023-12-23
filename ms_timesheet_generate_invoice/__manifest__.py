@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Start Stop Timesheet",
+    'name': "Timesheet Generate Invoice",
 
     'summary': """
-        Add start, stop and break time to track duration on timesheet 
+        Generate customer invoice based on timesheet
     """,
 
     'description': """
-        
+
     """,
 
     'author': "Miftahussalam",
@@ -22,6 +22,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'account',
         'analytic',
         'hr_timesheet',
     ],
@@ -29,6 +30,7 @@
     # always loaded
     'data': [
         # 'views/account_analytic_line_views.xml',
+        # 'views/project_project_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
