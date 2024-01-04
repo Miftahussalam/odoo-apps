@@ -1,5 +1,6 @@
 - gunakan main_screenshot.png
 - font open sans
 - font size 78
+- bold
 - color white
 - position center
