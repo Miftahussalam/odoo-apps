@@ -21,5 +21,8 @@
     'demo': [
 
     ],
+    'images': [
+        'static/description/images/main_screenshot.png',
+    ],
     'license': 'LGPL-3',
 }
