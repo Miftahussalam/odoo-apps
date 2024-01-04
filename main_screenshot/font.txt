@@ -1,4 +1,4 @@
-- gunakan banner.png
+- gunakan main_screenshot.png
 - font open sans
 - font size 78
 - color white
