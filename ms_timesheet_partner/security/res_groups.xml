@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_hr_timesheet_partner" model="res.groups">
+            <field name="name">Client</field>
+            <field name="category_id" ref="base.module_category_services_timesheets"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'hr_timesheet'), ('name', '=', 'group_hr_timesheet_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <record id="hr_timesheet.group_hr_timesheet_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('ms_timesheet_partner.group_hr_timesheet_partner'))]"/>
+        </record>
+
+    </data>
+</odoo>
