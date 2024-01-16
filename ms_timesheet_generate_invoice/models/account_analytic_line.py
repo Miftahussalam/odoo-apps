@@ -68,3 +68,15 @@ a/n {self.env.user.company_id.name}"""
                 'domain': [('id', 'in', invoice_ids.ids)],
             })
         return action
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super(AccountAnalyticLine, self).create(vals_list)
+        res._get_amount()
+        return res
+
+    def write(self, vals):
+        res = super(AccountAnalyticLine, self).write(vals)
+        if 'unit_amount' in vals:
+            self._get_amount()
+        return res
