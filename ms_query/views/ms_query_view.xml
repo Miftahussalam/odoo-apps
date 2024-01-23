@@ -5,10 +5,10 @@
 		    <field name="name">ms.query.search</field>
 		    <field name="model">ms.query</field>
 		    <field name="arch" type="xml">
-		        <tree string="Execute Query">
+		        <search>
 		            <field name="name"/>
-					<field name="backup"/>
-		        </tree>
+					<field name="query"/>
+		        </search>
 		     </field>
 		</record>
 
@@ -16,9 +16,9 @@
 		    <field name="name">ms_query_tree</field>
 		    <field name="model">ms.query</field>
 		    <field name="arch" type="xml">
-		        <tree string="Execute Query">
+		        <tree>
 		            <field name="name"/>
-		            <field name="backup"/>
+					<field name="query" optional="hide"/>
 		        </tree>
 		     </field>
 		</record>
@@ -28,20 +28,21 @@
 		    <field name="model">ms.query</field>
 		    <field name="arch" type="xml">
 
-		    	<form string="Execute Query">
+		    	<form>
 		    		<sheet>
-		    			<group col="4">
-				            <field name="backup" nolabel="1" placeholder="Backup query"/>
+						<label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="e.g. Query Select Customer"/>
+                        </h1>
+		    			<group>
+				            <field name="query" required="1" nolabel="1" colspan="2" placeholder="Syntax query"/>
 						</group>
-		    			<group col="4">
-				            <field name="name" required="1" nolabel="1" placeholder="Syntax query"/>
-						</group>
-						<group col="4">
+						<group>
 				            <button name="execute_query" string="Execute" type="object" class="oe_highlight"/>
 						</group>
 						<separator string="Result"/>
-						<group col="4">
-				            <field name="result" nolabel="1" placeholder="Result" readonly="1"/>
+						<group>
+				            <field name="result" nolabel="1" colspan="2" placeholder="Result" readonly="1"/>
 						</group>
 		    		</sheet>
 		    		<div class="oe_chatter">
