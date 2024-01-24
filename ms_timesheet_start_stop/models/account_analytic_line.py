@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
-    _order = 'end_time DESC NULLS FIRST'
+    _order = 'end_time DESC'
 
     @api.depends('start_time', 'end_time', 'break_time', 'break_unit_amount')
     def _get_unit_amount(self):
