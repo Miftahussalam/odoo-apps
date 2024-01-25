@@ -31,6 +31,13 @@ class WeddingWishes(http.Controller):
 
     @http.route('/telegram/webhook/receiver', type='json', auth='public', methods=['POST'], csrf=False)
     def handle_webhook(self, **post):
+        token = self.get_token()
         payload = json.loads(http.request.httprequest.data)
         _logger.info(f"payload: {payload}")
         _logger.info(f"post: {post}")
+        message = "Pesan anda telah kami terima. Terimaksih"
+        chat_id = payload['message']['chat']['id']
+        url = f'https://api.telegram.org/bot{token}/sendMessage'
+        data = {'chat_id': chat_id, 'text': message}
+        response = requests.post(url, data=data)
+        _logger.info(f"response: {response.json()}")
