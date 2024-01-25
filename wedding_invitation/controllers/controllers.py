@@ -23,3 +23,5 @@ class WeddingWishes(http.Controller):
                 vals['image'] = image_vals[-1]
         wedding_wishlist_obj.create(vals)
         return 'successfully'
+
+
