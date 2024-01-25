@@ -1,26 +1,30 @@
+import time
 from odoo import fields, models, api, _
 from odoo.exceptions import ValidationError
-import time
+
 
 class MsMagicButton(models.TransientModel):
     _name = "ms.magic.button"
     _description = "Magic Button"
 
     action = fields.Selection([
-        ('cancel_picking_expire','Cancel Picking Expired')
-    ], string="Action", default="cancel_picking_expire")
+        ('remove_expired_notification', 'Remove Expired Notification')
+    ], string="Action", default="remove_expired_notification")
 
     def action_magic(self):
-        if self.action == 'cancel_picking_expire' :
-            self.cancel_picking_expire()
-        self._cr.commit()
-        raise ValidationError(_('Successfully'))
+        getattr(self, f'action_{self.action}')()
 
-    def cancel_picking_expire(self):
-        current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        picking_ids = self.env['stock.picking'].search([
-            ('state','not in',['cancel','done']),
-            ('scheduled_date','<',current_time)
-        ])
-        move_ids = picking_ids.mapped('move_ids_without_package').filtered(lambda move: move.state not in ['cancel','done'])
-        move_ids._action_cancel()
+    def action_remove_expired_notification(self):
+        query = f"""
+            SELECT
+                id
+            FROM
+                mail_activity
+            WHERE
+                date_deadline < '{fields.Date.to_string(fields.Date.today())}'
+        """
+        self.env.cr.execute(query)
+        result = self.env.cr.dictfetchall()
+        for res in result:
+            activity_id = self.env['mail.activity'].browse(res['id'])
+            activity_id.unlink()

@@ -1,33 +1,27 @@
 {
-    "name"          : "Magic Button",
-    "version"       : "1.0",
-    "author"        : "Miftahussalam",
-    "website"       : "https://blog.miftahussalam.com",
-    "category"      : "Extra Tools",
-    "license"       : "LGPL-3",
-    "support"       : "me@miftahussalam.com",
-    "summary"       : "Run some actions in one click button",
-    "description"   : """
-        Magic Button
-
-Goto : Settings > Technical
+    "name": "Magic Button",
+    "summary": """
+        Run actions in one click button
     """,
-    "depends"       : [
+    "description": """
+    """,
+    "author": "Miftahussalam",
+    "website": "https://blog.miftahussalam.com/",
+    "category": "Extra Tools",
+    "version": "17.0.1.0.0",
+    "depends": [
         "base",
-        "stock",
+        "mail",
     ],
-    "data"          : [
-        "wizard/ms_magic_button.xml",
+    "data": [
         "security/ir.model.access.csv",
+        "wizard/ms_magic_button.xml",
     ],
-    "demo"          : [],
-    "test"          : [],
-    "images"        : [
+    "demo": [
+
+    ],
+    "images": [
         "static/description/images/main_screenshot.png",
     ],
-    "qweb"          : [],
-    "css"           : [],
-    "application"   : True,
-    "installable"   : True,
-    "auto_install"  : False,
+    "license": "LGPL-3",
 }

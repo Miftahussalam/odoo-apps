@@ -1,1 +1,3 @@
-from . import ms_magic_button
+from . import (
+    ms_magic_button
+)
