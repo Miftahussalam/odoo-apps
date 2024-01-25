@@ -24,4 +24,8 @@ class WeddingWishes(http.Controller):
         wedding_wishlist_obj.create(vals)
         return 'successfully'
 
-
+    @http.route('/telegram/webhook/receiver', type='json', auth='public', methods=['POST'], csrf=False)
+    def handle_webhook(self, **post):
+        payload = json.loads(http.request.httprequest.data)
+        _logger.info(f"payload: {payload}")
+        _logger.info(f"post: {post}")
