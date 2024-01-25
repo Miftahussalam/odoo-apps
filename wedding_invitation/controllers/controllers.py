@@ -30,22 +30,13 @@ class WeddingWishes(http.Controller):
         wedding_wishlist_obj.create(vals)
         return 'successfully'
 
-    def get_token(self, type=False):
-        criteria = []
-        if type:
-            criteria.append(('type', '=', type))
-        token_id = http.request.env['ms.telegram.token'].search(criteria, limit=1)
-        if not token_id:
-            ValidationError(_('Token not found.'))
-        return f'bot{token_id.name}'
-
     @http.route('/telegram/webhook/receiver', type='json', auth='public', methods=['POST'], csrf=False)
     def handle_webhook(self, **post):
-        token = '6766364282:AAGzV6Lpy6Aj3BN2RD8JRM-CnVETF_ACZwE'  # self.get_token()
+        token = '6766364282:AAGzV6Lpy6Aj3BN2RD8JRM-CnVETF_ACZwE'
         payload = json.loads(http.request.httprequest.data)
         _logger.info(f"payload: {payload}")
         _logger.info(f"post: {post}")
-        message = "Pesan anda telah kami terima. Terimaksih"
+        message = "Pesan anda telah kami terima. Terimakasih"
         chat_id = payload['message']['chat']['id']
         url = f'https://api.telegram.org/bot{token}/sendMessage'
         data = {'chat_id': chat_id, 'text': message}
