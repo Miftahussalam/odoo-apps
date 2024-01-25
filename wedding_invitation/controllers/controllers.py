@@ -40,7 +40,7 @@ class WeddingWishes(http.Controller):
 
     @http.route('/telegram/webhook/receiver', type='json', auth='public', methods=['POST'], csrf=False)
     def handle_webhook(self, **post):
-        token = self.get_token()
+        token = '6766364282:AAGzV6Lpy6Aj3BN2RD8JRM-CnVETF_ACZwE'  # self.get_token()
         payload = json.loads(http.request.httprequest.data)
         _logger.info(f"payload: {payload}")
         _logger.info(f"post: {post}")
