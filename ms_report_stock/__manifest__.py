@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Timesheet Export Excel",
+    "name": "Stock Report",
     "summary": """
-        Export timesheet to excel and grouping by project
+        Download stock report in excel format
     """,
     "description": """
     """,
@@ -16,7 +16,8 @@
         "hr_timesheet",
     ],
     "data": [
-        "views/account_analytic_line_views.xml",
+        "security/ir.model.access.csv",
+        "wizard/ms_report_stock_wizard.xml",
     ],
     "demo": [
 
