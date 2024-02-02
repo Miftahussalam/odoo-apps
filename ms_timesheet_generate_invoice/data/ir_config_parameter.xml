@@ -1,8 +1,0 @@
-<odoo>
-    <data noupdate="1">
-        <record id="ir_config_parameter_timesheet_target_amount" model="ir.config_parameter">
-            <field name="key">timesheet_target_amount</field>
-            <field name="value">700000</field>
-        </record>
-    </data>
-</odoo>

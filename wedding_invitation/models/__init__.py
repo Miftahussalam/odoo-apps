@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . import wedding_wishes
-from . import generate_guest_data
+from . import (
+    wedding_wishes,
+    generate_guest_data,
+)

@@ -8,11 +8,12 @@ import base64
 from datetime import datetime, date
 from pytz import timezone
 
+
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
 
     @api.model
-    def get_default_date_model(self):
+    def get_default_date_tz(self):
         return pytz.UTC.localize(datetime.now()).astimezone(timezone('Asia/Jakarta'))
 
     file_data = fields.Binary('File', readonly=True)
@@ -132,7 +133,7 @@ class AccountAnalyticLine(models.Model):
 
         workbook.close()
         result = base64.encodestring(fp.getvalue())
-        date_string = self.get_default_date_model().strftime("%Y-%m-%d")
+        date_string = self.get_default_date_tz().strftime("%Y-%m-%d")
         filename = '%s %s' % (report_name, date_string)
         filename += '%2Exlsx'
         self.write({'file_data': result})

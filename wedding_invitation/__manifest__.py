@@ -1,39 +1,28 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Wedding Invitation",
+    "name": "Wedding Invitation",
 
-    'summary': """
+    "summary": """
         Sync data with wedding invitation on https://arin.miftahussalam.com
     """,
-
-    'description': """
+    "description": """
 
     """,
-
-    'author': "Miftahussalam",
-    'website': "https://blog.miftahussalam.com/",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
-    # for the full list
-    'category': 'Others',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctly
-    'depends': [
-        'base',
+    "author": "Miftahussalam",
+    "website": "https://blog.miftahussalam.com/",
+    "category": "Others",
+    "version": "13.0.1.0.0",
+    "depends": [
+        "base",
     ],
-
-    # always loaded
-    'data': [
-        'views/wedding_invitation_menu.xml',
-        'views/wedding_wishes_views.xml',
-        'views/generate_guest_data_views.xml',
-        'security/res_groups.xml',
-        'security/ir.model.access.csv',
+    "data": [
+        "views/wedding_invitation_menu.xml",
+        "views/wedding_wishes_views.xml",
+        "views/generate_guest_data_views.xml",
+        "security/res_groups.xml",
+        "security/ir.model.access.csv",
     ],
-    # only loaded in demonstration mode
-    'demo': [
+    "demo": [
 
     ],
 }
