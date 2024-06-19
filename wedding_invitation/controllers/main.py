@@ -5,8 +5,6 @@ import requests
 
 from odoo import http
 from odoo.http import request
-from telebot import TeleBot
-from telebot import types
 
 _logger = logging.getLogger(__name__)
 
@@ -35,18 +33,11 @@ class WeddingWishes(http.Controller):
     @http.route('/telegram/webhook/receiver', type='json', auth='public', methods=['POST'], csrf=False)
     def handle_webhook(self):
         token = '6766364282:AAGzV6Lpy6Aj3BN2RD8JRM-CnVETF_ACZwE'
-        bot = TeleBot(token)
         payload = json.loads(http.request.httprequest.data)
         _logger.info(f"payload: {payload}")
-        button_info = types.InlineKeyboardButton('Info', callback_data='info')
-        button_order = types.InlineKeyboardButton('Order', callback_data='order')
-        keyboard = types.InlineKeyboardMarkup()
-        keyboard.add(button_info)
-        keyboard.add(button_order)
         message = "We have received your message. Thank You"
-        bot.send_message(chat_id, text=message, reply_markup=keyboard)
-        # chat_id = payload['message']['chat']['id']
-        # url = f'https://api.telegram.org/bot{token}/sendMessage'
-        # data = {'chat_id': chat_id, 'text': message}
-        # response = requests.post(url, data=data)
-        # _logger.info(f"response: {response.json()}")
+        chat_id = payload['message']['chat']['id']
+        url = f'https://api.telegram.org/bot{token}/sendMessage'
+        data = {'chat_id': chat_id, 'text': message}
+        response = requests.post(url, data=data)
+        _logger.info(f"response: {response.json()}")
