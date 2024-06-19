@@ -38,7 +38,10 @@ class WeddingWishes(http.Controller):
         payload = json.loads(http.request.httprequest.data)
         _logger.info(f"payload: {payload}")
         message = "We have received your message. Thank You"
-        chat_id = payload['message']['chat']['id']
+        if 'message' in payload:
+            chat_id = payload['message']['chat']['id']
+        else:
+            chat_id = payload['callback_query']['message']['chat']['id']
         # url = f'https://api.telegram.org/bot{token}/sendMessage'
         # data = {'chat_id': chat_id, 'text': message}
         # response = requests.post(url, data=data)
