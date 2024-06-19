@@ -6,6 +6,7 @@ import telegram
 
 from odoo import http
 from odoo.http import request
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
 _logger = logging.getLogger(__name__)
 
@@ -43,4 +44,8 @@ class WeddingWishes(http.Controller):
         # response = requests.post(url, data=data)
         # _logger.info(f"response: {response.json()}")
         bot = telegram.Bot(token=token)
-        bot.send_message(chat_id=chat_id, text=message)
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton(text='button1', callback_data='button1')],
+            [InlineKeyboardButton(text='button2', callback_data='button2')],
+        ])
+        bot.send_message(chat_id=chat_id, text=message, reply_markup=keyboard)
