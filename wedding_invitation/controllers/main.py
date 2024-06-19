@@ -2,6 +2,7 @@
 import json
 import logging
 import requests
+import telegram
 
 from odoo import http
 from odoo.http import request
@@ -37,7 +38,9 @@ class WeddingWishes(http.Controller):
         _logger.info(f"payload: {payload}")
         message = "We have received your message. Thank You"
         chat_id = payload['message']['chat']['id']
-        url = f'https://api.telegram.org/bot{token}/sendMessage'
-        data = {'chat_id': chat_id, 'text': message}
-        response = requests.post(url, data=data)
-        _logger.info(f"response: {response.json()}")
+        # url = f'https://api.telegram.org/bot{token}/sendMessage'
+        # data = {'chat_id': chat_id, 'text': message}
+        # response = requests.post(url, data=data)
+        # _logger.info(f"response: {response.json()}")
+        bot = telegram.Bot(token=token)
+        bot.send_message(chat_id=chat_id, text=message)
