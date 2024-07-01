@@ -133,7 +133,7 @@ class AccountAnalyticLine(models.Model):
 
         workbook.close()
         result = base64.encodestring(fp.getvalue())
-        datetime_string = self.get_default_date_tz().strftime("%Y-%m-%d")
+        datetime_string = self.get_default_date_tz().strftime("%Y-%m-%d %H:%M:%S")
         filename = '%s %s' % (report_name, datetime_string)
         filename += '%2Exlsx'
         self.write({'file_data': result})
