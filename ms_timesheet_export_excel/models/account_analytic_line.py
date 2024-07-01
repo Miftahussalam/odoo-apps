@@ -133,8 +133,8 @@ class AccountAnalyticLine(models.Model):
 
         workbook.close()
         result = base64.encodestring(fp.getvalue())
-        date_string = self.get_default_date_tz().strftime("%Y-%m-%d")
-        filename = '%s %s' % (report_name, date_string)
+        datetime_string = self.get_default_date_tz().strftime("%Y-%m-%d")
+        filename = '%s %s' % (report_name, datetime_string)
         filename += '%2Exlsx'
         self.write({'file_data': result})
         url = "web/content/?model=" + self._name + "&id=" + str(
