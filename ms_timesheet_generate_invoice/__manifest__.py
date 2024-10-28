@@ -20,9 +20,10 @@
         "ms_timesheet_start_stop",
     ],
     "data": [
-        "data/ir_config_parameter.xml",
         "views/account_analytic_line_views.xml",
         "views/project_project_views.xml",
+        "views/res_partner_views.xml",
+        "views/report_invoice.xml",
     ],
     "demo": [
 
