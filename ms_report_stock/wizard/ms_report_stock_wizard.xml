@@ -19,7 +19,7 @@
 		        	</group>
 
 	                <footer>
-	                    <button name="print_excel_report" string="Export" type="object" class="oe_highlight"/> or 
+	                    <button name="print_excel_report" string="Export" type="object" class="oe_highlight"/>
 	                    <button string="Cancel" class="oe_link" special="cancel"/>
 	                </footer>
 		          	
