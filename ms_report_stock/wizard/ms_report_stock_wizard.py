@@ -1,10 +1,11 @@
+import pytz
 import xlsxwriter
 import base64
+
 from odoo import fields, models, api
 from io import BytesIO
 from datetime import datetime
 from pytz import timezone
-import pytz
 
 
 class MsReportStockWizard(models.TransientModel):
