@@ -8,12 +8,11 @@
     """,
     "author": "Miftahussalam",
     "website": "https://blog.miftahussalam.com/",
-    "category": "Timesheet",
+    "category": "Inventory/Inventory",
     "version": "17.0.1.0.0",
     "depends": [
         "base",
-        "analytic",
-        "hr_timesheet",
+        "stock",
     ],
     "data": [
         "security/ir.model.access.csv",
