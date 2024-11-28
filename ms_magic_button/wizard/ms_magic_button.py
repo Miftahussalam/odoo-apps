@@ -26,5 +26,5 @@ class MsMagicButton(models.TransientModel):
         self.env.cr.execute(query)
         result = self.env.cr.dictfetchall()
         for res in result:
-            activity_id = self.env['mail.activity'].browse(res['id'])
+            activity_id = self.env['mail.activity'].sudo().browse(res['id'])
             activity_id.unlink()
