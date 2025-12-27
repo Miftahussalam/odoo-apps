@@ -1,4 +1,4 @@
-id,state_id:id,name
+id,state_id/id,name
 res_city_00001,base.state_id_ac,Kab. Aceh Selatan
 res_city_00002,base.state_id_ac,Kab. Aceh Tenggara
 res_city_00003,base.state_id_ac,Kab. Aceh Timur
@@ -505,11 +505,11 @@ res_city_00503,base.state_id_pt,Kab. Puncak
 res_city_00504,base.state_id_pt,Kab. Dogiyai
 res_city_00505,base.state_id_pt,Kab. Intan Jaya
 res_city_00506,base.state_id_pt,Kab. Deiyai
-res_city_00507,base.state_id_pp,Kab. Jayawijaya
-res_city_00508,base.state_id_pp,Kab. Pegunungan Bintang
-res_city_00509,base.state_id_pp,Kab. Yahukimo
-res_city_00510,base.state_id_pp,Kab. Tolikara
-res_city_00511,base.state_id_pp,Kab. Mamberamo Tengah
-res_city_00512,base.state_id_pp,Kab. Yalimo
-res_city_00513,base.state_id_pp,Kab. Lanny Jaya
-res_city_00514,base.state_id_pp,Kab. Nduga
+res_city_00507,base.state_id_pe,Kab. Jayawijaya
+res_city_00508,base.state_id_pe,Kab. Pegunungan Bintang
+res_city_00509,base.state_id_pe,Kab. Yahukimo
+res_city_00510,base.state_id_pe,Kab. Tolikara
+res_city_00511,base.state_id_pe,Kab. Mamberamo Tengah
+res_city_00512,base.state_id_pe,Kab. Yalimo
+res_city_00513,base.state_id_pe,Kab. Lanny Jaya
+res_city_00514,base.state_id_pe,Kab. Nduga

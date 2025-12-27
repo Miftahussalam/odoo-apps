@@ -1,4 +1,4 @@
-id,city_id:id,name
+id,city_id/id,name
 res_subdistrict_00001,res_city_00001,Bakongan
 res_subdistrict_00002,res_city_00001,Kluet Utara
 res_subdistrict_00003,res_city_00001,Kluet Selatan

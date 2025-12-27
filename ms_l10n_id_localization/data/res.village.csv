@@ -1,4 +1,4 @@
-id,subdistrict_id:id,name,zip
+id,subdistrict_id/id,name,zip
 village_00001,res_subdistrict_00001,Keude Bakongan,23773
 village_00002,res_subdistrict_00001,Ujong Mangki,
 village_00003,res_subdistrict_00001,Ujong Padang,
