@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, _
-from io import BytesIO
+
 import pytz
 import xlsxwriter
 import base64
-from datetime import datetime, date
+from odoo import models, fields, api, _
+from io import BytesIO
+from datetime import datetime, date, timedelta
 from pytz import timezone
 
 
@@ -83,6 +84,10 @@ class AccountAnalyticLine(models.Model):
     is_state_readonly = fields.Boolean(
         string='Is State Readonly',
         compute='_get_is_state_readonly')
+    invoice_id = fields.Many2one(
+        comodel_name='account.move',
+        string='Invoice',
+        required=False)
 
     def action_generate_invoice(self):
         project_ids = self.mapped('project_id')

@@ -14,17 +14,25 @@
         "mail",
         "account",
         "project",
+        "analytic",
         "hr_timesheet",
     ],
     "data": [
+        "data/ir_config_parameter.xml",
+        "security/res_groups.xml",
         "security/ir.model.access.csv",
-        "wizard/ms_magic_button.xml",
+        "security/ir_rule.xml",
+        "views/account_analytic_line_views.xml",
+        "views/project_project_views.xml",
+        "views/res_partner_views.xml",
+        "views/hr_employee_views.xml",
+        "views/report_invoice.xml",
     ],
     "demo": [
 
     ],
     "images": [
-        "static/description/images/main_screenshot.png",
+
     ],
     "license": "LGPL-3",
 }

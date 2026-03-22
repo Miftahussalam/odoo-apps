@@ -1,3 +1,3 @@
 from . import (
-    wizard
+    models
 )

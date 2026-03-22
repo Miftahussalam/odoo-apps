@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="param_timesheet_target_amount" model="ir.config_parameter">
+            <field name="key">timesheet_target_amount</field>
+            <field name="value">75000</field>
+        </record>
+
+    </data>
+</odoo>
