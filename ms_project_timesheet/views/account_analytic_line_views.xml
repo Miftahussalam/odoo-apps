@@ -27,16 +27,37 @@
             <field name="model">account.analytic.line</field>
             <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_tree"/>
             <field name="arch" type="xml">
-                <field name="unit_amount" position="after">
+
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="decoration-danger">break_time != False</attribute>
+                    <attribute name="decoration-info">end_time == False</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='unit_amount']" position="before">
+                    <field name="start_time"/>
+                    <field name="break_time"/>
+                    <field name="end_time"/>
+                    <button name="button_break" type="object" string=" Break" class="fa fa-pause btn-danger"/>
+                    <button name="button_resume" type="object" string=" Resume" class="fa fa-play btn-success"/>
+                    <field name="break_unit_amount" widget="timesheet_uom" sum="Total"/>
+                </xpath>
+
+                <xpath expr="//field[@name='unit_amount']" position="after">
+                    <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
+                    <field name="developer_amount" sum="Total Amount" groups="ms_timesheet_partner.group_hr_timesheet_developer"/>
+                    <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
+                    <field name="target_amount" groups="hr_timesheet.group_timesheet_manager"/>
                     <field name="is_state_readonly" invisible="1"/>
                     <field name="state" attrs="{'readonly': [('is_state_readonly', '=', True)]}" force_save="1"/>
-                </field>
+                </xpath>
+
                 <xpath expr="//field[@name='employee_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="column_invisible">1</attribute>
                 </xpath>
                 <xpath expr="//field[@name='task_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="column_invisible">1</attribute>
                 </xpath>
+
             </field>
         </record>
 
@@ -51,7 +72,6 @@
             </field>
         </record>
 
-        <!-- Inherit Form View to Modify it -->
         <record id="hr_timesheet_line_form" model="ir.ui.view">
             <field name="name">account.analytic.line.form</field>
             <field name="model">account.analytic.line</field>
@@ -76,7 +96,6 @@
             </field>
         </record>
 
-        <!-- Inherit Form View to Modify it -->
         <record id="timesheet_view_form_user" model="ir.ui.view">
             <field name="name">account.analytic.line.form</field>
             <field name="model">account.analytic.line</field>
@@ -88,6 +107,24 @@
                 </xpath>
 
             </field>
+        </record>
+
+        <record id="model_account_analytic_line_export_excel" model="ir.actions.server">
+            <field name="name">Export to Excel</field>
+            <field name="model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_export_to_excel()</field>
+            <field name="groups_id" eval="[(4, ref('ms_timesheet_partner.group_hr_timesheet_developer'))]"/>
+        </record>
+
+        <record id="model_account_analytic_line_generate_invoice" model="ir.actions.server">
+            <field name="name">Generate Invoice</field>
+            <field name="model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="state">code</field>
+            <field name="code">action = records.action_generate_invoice()</field>
+            <field name="groups_id" eval="[(4, ref('hr_timesheet.group_timesheet_manager'))]"/>
         </record>
 
         <record id="model_account_analytic_line_invoiced" model="ir.actions.server">
