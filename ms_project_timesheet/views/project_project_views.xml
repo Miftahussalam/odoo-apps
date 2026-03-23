@@ -15,5 +15,14 @@
             </field>
         </record>
 
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="group_ids" eval="[
+                (6, 0, [
+                    ref('hr.group_hr_manager'),
+                    ref('hr.group_hr_user')
+                ])
+            ]"/>
+        </record>
+
     </data>
 </odoo>

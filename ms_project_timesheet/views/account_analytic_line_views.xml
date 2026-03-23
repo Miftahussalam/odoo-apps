@@ -32,27 +32,28 @@
                     <attribute name="decoration-danger">break_time != False</attribute>
                     <attribute name="decoration-info">end_time == False</attribute>
                 </xpath>
-
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="column_invisible">1</attribute>
+                </xpath>
                 <xpath expr="//field[@name='unit_amount']" position="before">
                     <field name="start_time"/>
-                    <field name="break_time"/>
+                    <field name="break_time" optional="hide"/>
                     <field name="end_time"/>
                     <button name="button_break" type="object" string=" Break" class="fa fa-pause btn-danger"/>
                     <button name="button_resume" type="object" string=" Resume" class="fa fa-play btn-success"/>
-                    <field name="break_unit_amount" widget="timesheet_uom" sum="Total"/>
+                    <field name="break_unit_amount" widget="timesheet_uom" sum="Total" optional="hide"/>
                 </xpath>
-
                 <xpath expr="//field[@name='unit_amount']" position="after">
-                    <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
-                    <field name="developer_amount" sum="Total Amount" groups="ms_project_timesheet.group_hr_timesheet_developer"/>
-                    <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager"/>
-                    <field name="target_amount" groups="hr_timesheet.group_timesheet_manager"/>
-                    <field name="is_state_readonly" invisible="1"/>
+                    <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" optional="hide"/>
+                    <field name="developer_amount" sum="Total Amount" groups="ms_project_timesheet.group_hr_timesheet_developer" optional="hide"/>
+                    <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" string="Real Amt"/>
+                    <field name="target_amount" groups="hr_timesheet.group_timesheet_manager" string="Target Amt"/>
+                    <field name="is_state_readonly" column_invisible="1"/>
                     <field name="state" readonly="is_state_readonly" force_save="1"/>
                 </xpath>
-
                 <xpath expr="//field[@name='employee_id']" position="attributes">
-                    <attribute name="column_invisible">1</attribute>
+                    <attribute name="column_invisible">0</attribute>
+                    <attribute name="optional">hide</attribute>
                 </xpath>
                 <xpath expr="//field[@name='task_id']" position="attributes">
                     <attribute name="column_invisible">1</attribute>
@@ -67,7 +68,7 @@
             <field name="inherit_id" ref="hr_timesheet.timesheet_view_tree_user"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='employee_id']" position="attributes">
-                    <attribute name="invisible">1</attribute>
+                    <attribute name="column_invisible">1</attribute>
                 </xpath>
             </field>
         </record>
@@ -157,6 +158,16 @@
             <field name="code">
                 records.action_set_to_cancel()
             </field>
+        </record>
+
+        <record id="hr_timesheet.timesheet_menu_activity_user" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="hr_timesheet.timesheet_menu_activity_mine" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+        </record>
+        <record id="hr_timesheet.menu_timesheets_reports_timesheet" model="ir.ui.menu">
+            <field name="active" eval="False"/>
         </record>
 
     </data>

@@ -2,20 +2,15 @@
 <odoo>
     <data>
 
-        <record id="group_hr_timesheet_partner" model="res.groups">
-            <field name="name">Client</field>
-            <field name="privilege_id" ref="hr_timesheet.res_groups_privilege_timesheets"/>
-            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
-        </record>
-        <record id="group_hr_timesheet_developer" model="res.groups">
-            <field name="name">Developer</field>
-            <field name="privilege_id" ref="hr_timesheet.res_groups_privilege_timesheets"/>
-            <field name="implied_ids" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
-        </record>
-
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
                 <value eval="[('module', '=', 'hr_timesheet'), ('name', '=', 'group_hr_timesheet_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'hr_timesheet'), ('name', '=', 'group_hr_timesheet_approver')]"/>
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
@@ -27,10 +22,21 @@
         </function>
 
         <record id="hr_timesheet.group_hr_timesheet_user" model="res.groups">
-            <field name="implied_ids" eval="[(4, ref('ms_project_timesheet.group_hr_timesheet_partner'))]"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+        <record id="hr_timesheet.group_hr_timesheet_approver" model="res.groups">
+            <field name="name">Client</field>
+            <field name="privilege_id" ref="hr_timesheet.res_groups_privilege_timesheets"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_user')])]"/>
+        </record>
+        <record id="group_hr_timesheet_developer" model="res.groups">
+            <field name="name">Developer</field>
+            <field name="sequence">25</field>
+            <field name="privilege_id" ref="hr_timesheet.res_groups_privilege_timesheets"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('hr_timesheet.group_hr_timesheet_approver')])]"/>
         </record>
         <record id="hr_timesheet.group_timesheet_manager" model="res.groups">
-            <field name="implied_ids" eval="[(4, ref('group_hr_timesheet_developer')), (4, ref('hr.group_hr_user'))]"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('ms_project_timesheet.group_hr_timesheet_developer')])]"/>
         </record>
 
     </data>

@@ -2,15 +2,81 @@
 <odoo>
     <data>
 
-        <record id="hr_timesheet.timesheet_line_rule_user" model="ir.rule">
-            <field name="groups" eval="[(4, ref('ms_project_timesheet.group_hr_timesheet_partner'))]"/>
+        <!-- Buka noupdate -->
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','analytic'), ('name','=','analytic_line_comp_rule')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','hr_timesheet'), ('name','=','timesheet_line_rule_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','hr_timesheet'), ('name','=','timesheet_line_rule_approver')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','hr_timesheet'), ('name','=','timesheet_line_rule_manager')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','account'), ('name','=','account_analytic_line_rule_billing_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <function model="ir.model.data" name="write">
+            <function model="ir.model.data" name="search">
+                <value eval="[('module','=','account'), ('name','=','account_analytic_line_rule_readonly_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+
+        <!-- Setelah itu baru disable -->
+        <record id="analytic.analytic_line_comp_rule" model="ir.rule">
+            <field name="active" eval="False"/>
         </record>
 
+        <record id="hr_timesheet.timesheet_line_rule_user" model="ir.rule">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="hr_timesheet.timesheet_line_rule_approver" model="ir.rule">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="hr_timesheet.timesheet_line_rule_manager" model="ir.rule">
+            <field name="active" eval="True"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
+        <record id="account.account_analytic_line_rule_billing_user" model="ir.rule">
+            <field name="active" eval="False"/>
+        </record>
+
+        <record id="account.account_analytic_line_rule_readonly_user" model="ir.rule">
+            <field name="active" eval="False"/>
+        </record>
+
+        <!-- Record rule baru -->
         <record id="timesheet_line_rule_partner" model="ir.rule">
             <field name="name">account.analytic.line.timesheet.partner</field>
             <field name="model_id" ref="analytic.model_account_analytic_line"/>
             <field name="domain_force">[('project_id.partner_id', '=', user.partner_id.id)]</field>
-            <field name="groups" eval="[(4, ref('ms_project_timesheet.group_hr_timesheet_partner'))]"/>
+            <field name="groups" eval="[(4, ref('hr_timesheet.group_hr_timesheet_approver'))]"/>
         </record>
 
         <record id="timesheet_line_rule_developer" model="ir.rule">

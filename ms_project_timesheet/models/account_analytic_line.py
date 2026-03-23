@@ -59,6 +59,21 @@ class AccountAnalyticLine(models.Model):
                 is_state_readonly = False
             rec.is_state_readonly = is_state_readonly
 
+    @api.depends(
+        'start_time',
+        'employee_id',
+    )
+    def _compute_date(self):
+        for rec in self:
+            rec.date = False
+            if rec.start_time:
+                tz = rec.employee_id.tz or 'Asia/Jakarta'
+                local_dt = fields.Datetime.context_timestamp(
+                    rec.with_context(tz=tz),
+                    rec.start_time
+                )
+                rec.date = local_dt.date()
+
     file_data = fields.Binary('File', readonly=True)
     amount = fields.Float(
         string='Amount',
@@ -88,6 +103,12 @@ class AccountAnalyticLine(models.Model):
         comodel_name='account.move',
         string='Invoice',
         required=False)
+    date = fields.Date(
+        compute='_compute_date',
+        compute_sudo=True,
+        store=True,
+        required=False,
+    )
 
     def action_generate_invoice(self):
         project_ids = self.mapped('project_id')
