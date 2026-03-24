@@ -125,8 +125,10 @@ class AccountAnalyticLine(models.Model):
         for partner_id in partner_ids:
             line_vals = []
             partner_project_ids = project_ids.filtered(lambda p: p.partner_id == partner_id)
+            partner_timesheet_ids = self.env['account.analytic.line']
             for project_id in partner_project_ids:
                 timesheet_ids = self.filtered(lambda t: t.project_id == project_id)
+                partner_timesheet_ids |= timesheet_ids
                 line_vals.append((0, 0, {
                     'name': f'Custom module {project_id.display_name}',
                     'quantity': round(sum(l.unit_amount for l in timesheet_ids), 2),
@@ -143,9 +145,12 @@ class AccountAnalyticLine(models.Model):
     a/n {self.env.user.company_id.name}"""
             invoice_id = self.env['account.move'].create({
                 'partner_id': partner_id.id,
-                'type': 'out_invoice',
+                'move_type': 'out_invoice',
                 'invoice_line_ids': line_vals,
                 'narration': narration,
+            })
+            partner_timesheet_ids.write({
+                'invoice_id': invoice_id.id
             })
             invoice_id.action_post()
             invoice_ids += invoice_id
@@ -285,7 +290,7 @@ class AccountAnalyticLine(models.Model):
                     worksheet.write(row, x, column_float_number[x], cell_format['total'])
 
         workbook.close()
-        result = base64.encodestring(fp.getvalue())
+        result = base64.b64encode(fp.getvalue())
         datetime_string = self.get_default_date_tz().strftime("%Y-%m-%d %H:%M:%S")
         filename = '%s %s' % (report_name, datetime_string)
         filename += '%2Exlsx'
@@ -293,10 +298,10 @@ class AccountAnalyticLine(models.Model):
         url = "web/content/?model=" + self._name + "&id=" + str(
             self[:1].id) + "&field=file_data&download=true&filename=" + filename
         return {
-            'name': 'Generic Excel Report',
+            'name': 'Timesheets',
             'type': 'ir.actions.act_url',
             'url': url,
-            'target': 'new',
+            'target': 'self',
         }
 
     def button_start_stop(self):
