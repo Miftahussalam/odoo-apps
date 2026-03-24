@@ -152,6 +152,7 @@ class AccountAnalyticLine(models.Model):
                 'move_type': 'out_invoice',
                 'invoice_line_ids': line_vals,
                 'narration': narration,
+                'partner_bank_id': False,
             })
             partner_timesheet_ids.write({
                 'invoice_id': invoice_id.id

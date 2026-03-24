@@ -4,50 +4,19 @@
         
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
             <xpath expr="//div[@id='qrcode']" position="after">
-                <br/>
-                <br/>
-                <table t-if="o.partner_id.invoice_signature" style="page-break-inside: avoid; width:100%" class="border-0">
-                    <tr>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                        <td style="width:20%" class="border-0 text-right">
-
-                        </td>
-                        <td style="width:35%" class="border-0 text-center">
-                            <span>Tertanda,</span>
-                        </td>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                        <td style="width:20%" class="border-0">
-
-                        </td>
-                        <td style="width:35%" class="border-0 text-center">
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <br/>
-                            <div>Miftahussalam</div>
-                        </td>
-                        <td style="width:5%" class="border-0">
-
-                        </td>
-                    </tr>
-                </table>
+                <t t-if="o.partner_id.invoice_signature">
+                    <br/>
+                    <br/>
+                    <div style="width:100%; text-align:right; page-break-inside: avoid;">
+                        <div style="display:inline-block; width:35%; text-align:center;">
+                            <div>Tertanda,</div>
+                            <br/><br/><br/><br/><br/><br/>
+                            <div><span t-esc="o.company_id.name"/></div>
+                        </div>
+                    </div>
+                    <br/>
+                    <br/>
+                </t>
             </xpath>
         </template>
     
