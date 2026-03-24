@@ -299,26 +299,39 @@ class AccountAnalyticLine(models.Model):
             'target': 'new',
         }
 
-    def button_break(self):
-        for rec in self.filtered(lambda t: t.start_time and not t.end_time and not t.break_time):
-            rec.write({
-                'break_time': fields.Datetime.now(),
-            })
+    def button_start_stop(self):
+        for rec in self.filtered(lambda t: not t.break_time):
+            if not rec.start_time:
+                rec.write({
+                    'start_time': fields.Datetime.now(),
+                })
+            elif not rec.end_time:
+                rec.write({
+                    'end_time': fields.Datetime.now(),
+                })
 
-    def button_resume(self):
-        for rec in self.filtered(lambda t: t.break_time):
-            additional_break = fields.Datetime.now() - rec.break_time
-            additional_break = additional_break.total_seconds() / 3600.0
-            rec.write({
-                'break_time': False,
-                'break_unit_amount': rec.break_unit_amount + additional_break
-            })
+    def button_break_resume(self):
+        for rec in self.filtered(lambda t: t.start_time and not t.end_time):
+            if not rec.break_time:
+                rec.write({
+                    'break_time': fields.Datetime.now(),
+                })
+            else:
+                additional_break = fields.Datetime.now() - rec.break_time
+                additional_break = additional_break.total_seconds() / 3600.0
+                rec.write({
+                    'break_time': False,
+                    'break_unit_amount': rec.break_unit_amount + additional_break
+                })
 
     @api.constrains('end_time')
     def _check_break_time(self):
         for rec in self:
             if rec.end_time and rec.break_time:
                 raise ValidationError(_(f'Please click button resume first for timesheet {rec.display_name}.'))
+
+    def action_set_to_open(self):
+        self.write({'state': 'open'})
 
     def action_set_to_invoiced(self):
         self.write({'state': 'invoiced'})
