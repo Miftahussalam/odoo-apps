@@ -113,10 +113,10 @@ class AccountAnalyticLine(models.Model):
 
     def action_generate_invoice(self):
         invalid_records = self.filtered(lambda r: r.state != 'open')
-        # if invalid_records:
-        #     raise ValidationError(_(
-        #         "You can only generate invoices for timesheets that are in 'Open' status."
-        #     ))
+        if invalid_records:
+            raise ValidationError(_(
+                "You can only generate invoices for timesheets that are in 'Open' status."
+            ))
         project_ids = self.mapped('project_id')
         no_customer_project_ids = project_ids.filtered(lambda p: not p.partner_id)
         if no_customer_project_ids:
