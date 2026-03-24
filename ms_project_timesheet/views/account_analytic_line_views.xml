@@ -56,11 +56,11 @@
                 </xpath>
                 <xpath expr="//field[@name='unit_amount']" position="after">
                     <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" optional="hide"/>
-                    <field name="developer_amount" sum="Total Amount" groups="ms_project_timesheet.group_hr_timesheet_developer" optional="hide"/>
+                    <field name="developer_amount" sum="Total Amount" groups="ms_project_timesheet.group_hr_timesheet_developer" optional="hide" string="Dev Amt"/>
                     <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" string="Real Amt"/>
                     <field name="target_amount" groups="hr_timesheet.group_timesheet_manager" string="Target Amt"/>
                     <field name="is_state_readonly" column_invisible="1"/>
-                    <field name="state" readonly="is_state_readonly" force_save="1"/>
+                    <field name="state" readonly="is_state_readonly" force_save="1" required="1"/>
                 </xpath>
                 <xpath expr="//field[@name='employee_id']" position="attributes">
                     <attribute name="column_invisible">0</attribute>
@@ -124,13 +124,27 @@
         </record>
 
         <record id="model_account_analytic_line_generate_invoice" model="ir.actions.server">
-            <field name="name">Generate Invoice</field>
+            <field name="name">Generate Invoices</field>
             <field name="model_id" ref="analytic.model_account_analytic_line"/>
             <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
             <field name="state">code</field>
             <field name="code">
                 action = records.action_generate_invoice()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="model_account_analytic_line_view_invoice" model="ir.actions.server">
+            <field name="name">View Invoices</field>
+            <field name="model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="binding_model_id" ref="analytic.model_account_analytic_line"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = records.action_view_invoice()
+            </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">20</field>
         </record>
 
         <record id="model_account_analytic_line_export_excel" model="ir.actions.server">
@@ -141,6 +155,8 @@
             <field name="code">
                 action = records.action_export_to_excel()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">30</field>
         </record>
 
         <record id="model_account_analytic_line_invoiced" model="ir.actions.server">
@@ -151,6 +167,8 @@
             <field name="code">
                 records.action_set_to_invoiced()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">40</field>
         </record>
 
         <record id="model_account_analytic_line_paid" model="ir.actions.server">
@@ -161,6 +179,8 @@
             <field name="code">
                 records.action_set_to_paid()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">50</field>
         </record>
 
         <record id="model_account_analytic_line_cancel" model="ir.actions.server">
@@ -171,6 +191,8 @@
             <field name="code">
                 records.action_set_to_cancel()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">60</field>
         </record>
 
         <record id="model_account_analytic_line_open" model="ir.actions.server">
@@ -181,6 +203,8 @@
             <field name="code">
                 records.action_set_to_open()
             </field>
+            <field name="group_ids" eval="[(6, 0, [ref('hr_timesheet.group_timesheet_manager')])]"/>
+            <field name="sequence">70</field>
         </record>
 
         <record id="hr_timesheet.timesheet_menu_activity_user" model="ir.ui.menu">

@@ -13,6 +13,7 @@ from odoo.exceptions import ValidationError
 
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
+    _order = 'end_time DESC, start_time DESC'
 
     @api.model
     def get_default_date_tz(self):
@@ -96,14 +97,14 @@ class AccountAnalyticLine(models.Model):
         ('invoiced', 'Invoiced'),
         ('paid', 'Paid'),
         ('cancel', 'Cancel'),
-    ], string='State', default='open')
+    ], string='State', default='open', copy=False)
     is_state_readonly = fields.Boolean(
         string='Is State Readonly',
         compute='_get_is_state_readonly')
     invoice_id = fields.Many2one(
         comodel_name='account.move',
         string='Invoice',
-        required=False)
+        copy=False)
     date = fields.Date(
         compute='_compute_date',
         compute_sudo=True,
@@ -116,6 +117,11 @@ class AccountAnalyticLine(models.Model):
         if invalid_records:
             raise ValidationError(_(
                 "You can only generate invoices for timesheets that are in 'Open' status."
+            ))
+        invalid_records = self.filtered(lambda r: r.amount <= 0)
+        if invalid_records:
+            raise ValidationError(_(
+                "You can only generate invoices for timesheets that have a valid amount."
             ))
         project_ids = self.mapped('project_id')
         no_customer_project_ids = project_ids.filtered(lambda p: not p.partner_id)
@@ -160,6 +166,22 @@ class AccountAnalyticLine(models.Model):
             invoice_id.action_post()
             invoice_ids += invoice_id
         self.write({'state': 'invoiced'})
+        action = self.env.ref('account.action_move_out_invoice_type').read()[0]
+        if len(invoice_ids) == 1:
+            action.update({
+                'view_mode': 'form',
+                'res_id': invoice_ids.id,
+                'views': [[False, 'form']]
+            })
+        else:
+            action.update({
+                'view_mode': 'list,form',
+                'domain': [('id', 'in', invoice_ids.ids)],
+            })
+        return action
+
+    def action_view_invoice(self):
+        invoice_ids = self.mapped('invoice_id')
         action = self.env.ref('account.action_move_out_invoice_type').read()[0]
         if len(invoice_ids) == 1:
             action.update({
@@ -351,3 +373,11 @@ class AccountAnalyticLine(models.Model):
 
     def action_set_to_cancel(self):
         self.write({'state': 'cancel'})
+
+    def unlink(self):
+        invalid_records = self.filtered(lambda r: r.state != 'open')
+        if invalid_records:
+            raise ValidationError(_(
+                "You can only delete records that are in 'Open' state."
+            ))
+        return super().unlink()
