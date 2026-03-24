@@ -8,6 +8,7 @@ from odoo import models, fields, api, _
 from io import BytesIO
 from datetime import datetime, date, timedelta
 from pytz import timezone
+from odoo.exceptions import ValidationError
 
 
 class AccountAnalyticLine(models.Model):
@@ -111,6 +112,11 @@ class AccountAnalyticLine(models.Model):
     )
 
     def action_generate_invoice(self):
+        invalid_records = self.filtered(lambda r: r.state != 'open')
+        if invalid_records:
+            raise ValidationError(_(
+                "You can only generate invoices for timesheets that are in 'Open' status."
+            ))
         project_ids = self.mapped('project_id')
         no_customer_project_ids = project_ids.filtered(lambda p: not p.partner_id)
         if no_customer_project_ids:
@@ -139,10 +145,8 @@ class AccountAnalyticLine(models.Model):
             if self.env.user.company_id.partner_id.bank_ids:
                 bank_list = [f'{bank_id.bank_id.name} {bank_id.acc_number}' for bank_id in
                              self.env.user.company_id.partner_id.bank_ids]
-                bank_list = '\n'.join(bank_list)
-                narration = f"""{bank_list}
-
-    a/n {self.env.user.company_id.name}"""
+                bank_list = '<br/>'.join(bank_list)
+                narration = f"{bank_list}<br/><br/>a/n {self.env.user.company_id.name}"
             invoice_id = self.env['account.move'].create({
                 'partner_id': partner_id.id,
                 'move_type': 'out_invoice',
