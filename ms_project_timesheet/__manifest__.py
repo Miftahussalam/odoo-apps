@@ -26,6 +26,7 @@
         "views/project_project_views.xml",
         "views/res_partner_views.xml",
         "views/hr_employee_views.xml",
+        "views/res_users_views.xml",
         "views/report_invoice.xml",
     ],
     "demo": [

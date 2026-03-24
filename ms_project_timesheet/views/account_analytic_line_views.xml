@@ -44,11 +44,13 @@
                             type="object"
                             string="Start / Stop"
                             icon="fa-play"
+                            groups="ms_project_timesheet.group_hr_timesheet_developer"
                             class="btn-success"/>
                     <button name="button_break_resume"
                             type="object"
                             string="Break / Resume"
                             icon="fa-pause"
+                            groups="ms_project_timesheet.group_hr_timesheet_developer"
                             class="btn-warning"/>
                     <field name="break_unit_amount" widget="timesheet_uom" sum="Total" optional="hide" string="Break (h)"/>
                 </xpath>

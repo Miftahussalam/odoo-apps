@@ -4,4 +4,5 @@ from . import (
     account_analytic_line,
     project_project,
     account_move,
+    res_users,
 )
