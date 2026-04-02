@@ -13,7 +13,7 @@ from odoo.exceptions import ValidationError
 
 class AccountAnalyticLine(models.Model):
     _inherit = 'account.analytic.line'
-    _order = 'end_time DESC, start_time DESC'
+    _order = 'start_time DESC'
 
     @api.model
     def get_default_date_tz(self):
@@ -277,7 +277,7 @@ class AccountAnalyticLine(models.Model):
                 worksheet.write(3, column, col, cell_format['header'])
                 column += 1
             data_list = []
-            for rec in self.filtered(lambda t: t.project_id == project_id).sorted(key=lambda t: t.date):
+            for rec in self.filtered(lambda t: t.project_id == project_id).sorted(key=lambda t: t.start_time):
                 data_list.append([
                     rec.date or '',
                     rec.name or '',

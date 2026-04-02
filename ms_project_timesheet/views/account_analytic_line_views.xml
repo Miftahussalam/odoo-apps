@@ -7,6 +7,7 @@
             <field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_search"/>
             <field name="arch" type="xml">
                 <field name="name" position="after">
+                    <field name="partner_id" string="Customer"/>
                     <field name="state"/>
                 </field>
                 <filter name="mine" position="after">
@@ -69,6 +70,12 @@
                 </xpath>
                 <xpath expr="//field[@name='task_id']" position="attributes">
                     <attribute name="column_invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date']" position="attributes">
+                    <attribute name="readonly">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='unit_amount']" position="attributes">
+                    <attribute name="readonly">1</attribute>
                 </xpath>
 
             </field>
