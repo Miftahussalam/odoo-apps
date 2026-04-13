@@ -43,13 +43,13 @@
                     <field name="end_time"/>
                     <button name="button_start_stop"
                             type="object"
-                            string="Start / Stop"
+                            string="S / F"
                             icon="fa-play"
                             groups="ms_project_timesheet.group_hr_timesheet_developer"
                             class="btn-success"/>
                     <button name="button_break_resume"
                             type="object"
-                            string="Break / Resume"
+                            string="B / R"
                             icon="fa-pause"
                             groups="ms_project_timesheet.group_hr_timesheet_developer"
                             class="btn-warning"/>
@@ -59,9 +59,9 @@
                     <field name="amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" optional="hide"/>
                     <field name="developer_amount" sum="Total Amount" groups="ms_project_timesheet.group_hr_timesheet_developer" optional="hide" string="Dev Amt"/>
                     <field name="real_amount" sum="Total Amount" groups="hr_timesheet.group_timesheet_manager" string="Real Amt"/>
-                    <field name="target_amount" groups="hr_timesheet.group_timesheet_manager" string="Target Amt"/>
+                    <field name="target_amount" groups="hr_timesheet.group_timesheet_manager" string="Target Amt" optional="hide"/>
                     <field name="is_state_readonly" column_invisible="1"/>
-                    <field name="state" readonly="is_state_readonly" force_save="1" required="1"/>
+                    <field name="state" readonly="is_state_readonly" force_save="1" required="1" optional="hide"/>
                 </xpath>
                 <xpath expr="//field[@name='employee_id']" position="attributes">
                     <attribute name="column_invisible">0</attribute>
