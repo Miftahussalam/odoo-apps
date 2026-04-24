@@ -112,6 +112,12 @@ class AccountAnalyticLine(models.Model):
         required=False,
     )
 
+    def default_get(self, fields_list):
+        self = self.with_context(default_project_id=False)
+        res = super(AccountAnalyticLine, self).default_get(fields_list)
+        res['project_id'] = False
+        return res
+
     def action_generate_invoice(self):
         invalid_records = self.filtered(lambda r: r.state != 'open')
         if invalid_records:
