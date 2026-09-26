@@ -8,10 +8,11 @@
     "author": "Miftahussalam",
     "website": "https://blog.miftahussalam.com/",
     "category": "Regional",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.0.1",
     "depends": [
         "base",
         "contacts",
+        "base_address_extended",
     ],
     "data": [
         "data/res.country.state.csv",
