@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_res_city_all,res_city_all,res.city,base.group_user,crud,
+access_res_subdistrict_all,res_subdistrict_all,res.subdistrict,base.group_user,crud,
+access_res_village_all,res_village_all,res.village,base.group_user,crud,
