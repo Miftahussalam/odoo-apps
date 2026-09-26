@@ -1,0 +1,2 @@
+id,name,model_id,group_id/id,operation,domain
+access_ms_report_stock_wizard_all,ms_report_stock_wizard all,ms.report.stock.wizard,base.group_everyone,crud,
